@@ -40,6 +40,9 @@ class Board extends Component {
   }
   handleClick(i){
       const squares = this.state.squares.slice();
+      if(squares[i]||this.state.winner){
+         return false;
+      }
       squares[i] = this.state.xIsNext?'X':'O';
       this.setState({ 
           squares:squares,
