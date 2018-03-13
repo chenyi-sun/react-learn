@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Names, { multiply, year,streamV1} from './js/test.js'
-
-
-console.log(Names);
-console.log(multiply);
-console.log(year);
-console.log(streamV1(100, 200));
-
+// import Names, { multiply, year,streamV1} from './js/test.js'
 
 class App extends Component {
   render() {
@@ -21,6 +14,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <h1>{2+2}</h1>
+        <div></div>
       </div>
     );
   }
