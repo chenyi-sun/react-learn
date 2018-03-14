@@ -84,13 +84,14 @@ class App extends Component {
          return false;
      }
      if(this.state.num&&this.state.num<=this.state.history.length){
-         this.state.history = this.state.history.slice(0,this.state.num+1);
+         var length = this.state.num+1;
+         this.state.history = this.state.history.slice(0,length);
          this.setState({
              num: 0,
          });
      }
      var arr = this.state.squares.slice();
-     arr[i] = !this.state.isFlag?'X':'O';
+     arr[i] = this.state.history.length%2!==0?'X':'O';
      this.setState({
           isFlag: !this.state.isFlag, 
           squares: arr,
