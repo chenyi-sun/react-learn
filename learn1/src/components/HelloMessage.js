@@ -83,11 +83,10 @@ class App extends Component {
      if(this.state.squares[i]||calculateWinner(this.state.squares)){
          return false;
      }
-     if(this.state.num<=this.state.history.length){
-         console.log(this.state.history.slice(0,this.state.num));
-         console.log(this.state.history);
+     if(this.state.num&&this.state.num<=this.state.history.length){
+         this.state.history = this.state.history.slice(0,this.state.num+1);
          this.setState({
-            //  history: this.state.history.substr(0,this.state.num)
+             num: 0,
          });
      }
      var arr = this.state.squares.slice();
@@ -104,14 +103,14 @@ class App extends Component {
      this.setState({
          squares: this.state.history[move].squares,
          num: move
-     })
+     });
   }
   render() {
     const moves = this.state.history.map((step, move)=>{
         var name = move?'#move '+move+'step': 'game Start';
         return (
             <li key={move}>
-                <a href="#" onClick={()=> this.jumpTo(move)}>{name}</a>
+                <a   href="#" onClick={()=> this.jumpTo(move)}>{name}</a>
             </li>
         );
     })
