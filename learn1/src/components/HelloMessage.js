@@ -3,11 +3,14 @@ import './../App.css';
 
 function Square(props){
     return (
-        <button className="square" onClick={() => props.onClick() }>
+        <button className="square" 
+            onClick={() => props.onClick() }
+        >
              {props.value}
         </button>
     );
 }
+// onClick={() => props.onClick() }
 function calculateWinner(squares){
     const lines = [
         [0,1,2],
@@ -30,38 +33,17 @@ function calculateWinner(squares){
 
 
 class Board extends Component {
-  constructor(){
-      super();
-      this.state = {
-          squares: Array(9).fill(null),
-          xIsNext: true,
-          winner: null,
-      }
-  }
-  handleClick(i){
-      const squares = this.state.squares.slice();
-      if(squares[i]||this.state.winner){
-         return false;
-      }
-      squares[i] = this.state.xIsNext?'X':'O';
-      this.setState({ 
-          squares:squares,
-          xIsNext: !this.state.xIsNext,
-          winner: calculateWinner(squares)
-      });
-  }
   renderSquare(i) {
     return(
         <Square 
-            value={this.state.squares[i]} 
-            onClick={() => this.handleClick(i)}
+            value={this.props.squares[i]} 
+            onClick ={()=>this.props.onClick(i)}
         />
     );
   }
+    // onClick={() => this.handleClick(i)}
   render() {
-    const status =
-    !this.state.winner?('Next player: '+ (this.state.xIsNext?'X':'O')):('Winner is: '+this.state.winner);
-
+    const status = 'none'
     return (
       <div>
         <div className="status">{status}</div>
@@ -86,15 +68,61 @@ class Board extends Component {
 }
 
 class App extends Component {
+  constructor(){
+      super();
+      this.state = {
+          history: [
+             {squares:Array(9).fill(null)}
+          ],
+          squares: Array(9).fill(null),
+          isFlag: false,
+          num: 0,
+      }
+  }
+  Sclick(i){
+     if(this.state.squares[i]||calculateWinner(this.state.squares)){
+         return false;
+     }
+     if(this.state.num<=this.state.history.length){
+         console.log(this.state.history.slice(0,this.state.num));
+         console.log(this.state.history);
+         this.setState({
+            //  history: this.state.history.substr(0,this.state.num)
+         });
+     }
+     var arr = this.state.squares.slice();
+     arr[i] = !this.state.isFlag?'X':'O';
+     this.setState({
+          isFlag: !this.state.isFlag, 
+          squares: arr,
+          history: this.state.history.concat({
+              squares: arr
+          })       
+     });
+  }
+  jumpTo(move){
+     this.setState({
+         squares: this.state.history[move].squares,
+         num: move
+     })
+  }
   render() {
+    const moves = this.state.history.map((step, move)=>{
+        var name = move?'#move '+move+'step': 'game Start';
+        return (
+            <li key={move}>
+                <a href="#" onClick={()=> this.jumpTo(move)}>{name}</a>
+            </li>
+        );
+    })
     return (
       <div className="game">
         <div className="game-board">
-          <Board />
+          <Board onClick={(i)=>this.Sclick(i)} squares={this.state.squares}/>
         </div>
         <div className="game-info">
           <div>{/* status */}</div>
-          <ol>{/* TODO */}</ol>
+          <ol>{moves}</ol>
         </div>
       </div>
     );
