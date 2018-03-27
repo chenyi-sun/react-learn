@@ -1,0 +1,11 @@
+babel-loader: babel加载器
+
+babel-preset-es2015: 支持es2015
+
+babel-preset-react: jsx 转换成js
+
+根据这个链接配置的项目
+
+//http://www.cnblogs.com/raion/p/8053799.html
+
+bin 服务器配置目录
