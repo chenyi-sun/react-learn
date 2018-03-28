@@ -18,5 +18,14 @@ module.exports = {
                 exclude: /node_modules/
             }
         ]
+    },
+    devServer: {
+        https: true,
+            open: true,
+            overlay: {
+            warnings: true,
+            errors: true
+        },
     }
 }
+

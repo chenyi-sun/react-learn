@@ -11,3 +11,5 @@ babel-preset-react: jsx 转换成js
 bin 服务器配置目录
 
 服务器端一直报错，需要更新node再尝试
+
+//https://zhuanlan.zhihu.com/p/34446105
