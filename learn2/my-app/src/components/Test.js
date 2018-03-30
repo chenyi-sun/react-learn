@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 class Test extends React.Component {
     render(){
         return (
-            <div></div>
+            <div>{this.props.names.nm}</div>
         )
     }
 }
+export default Test;
