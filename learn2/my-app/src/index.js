@@ -1,29 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Test from './components/Test';
 // import App from './App';
 // import registerServiceWorker from './registerServiceWorker';
 
-class Welcome extends React.Component {
+class Clock extends React.Component {
+    constructor(props){
+        supoer(props);
+        this.state = {date: new Date()};
+    }
     render() {
-        return <h1>{this.props.name}</h1>
+        return (
+            <div>
+                <h1>
+                    it is {this.state.date.toLocaleTimeString()}
+                </h1>
+            </div>
+        )
     }
 }
 
-const skl = {
-    nm: 'klksdddS'
-}
-const element = (
-    <div>
-        <h1>hello world!</h1>
-        <Welcome name = "测试"/>
-        <Welcome name = "ask"/>
-        <Test names = {skl}/>
-        <h2>it is {new Date().toLocaleTimeString()}</h2>
-    </div>
-);
+
+
 ReactDOM.render(
-    element,
+    <Clock/ >,
     document.getElementById('root')
 );
