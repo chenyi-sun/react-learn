@@ -17,8 +17,10 @@ class Clock extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            date: new Date()
+            date: new Date(),
+            nowNumber: true,
         }
+        this.activeLaser = this.activeLaser.bind(this);
     }
     componentDidMount(){
         this.timerDI = setInterval(
@@ -34,10 +36,19 @@ class Clock extends React.Component {
             date: new Date()
         });
     }
-    activeLaser(e){
-        function handleClick(e){
-            
-        }
+    activeLaser(){
+        // function handleClick(e){
+        console.log("dksjkjs");
+        this.setState(prevState => ({
+            nowNumber: !prevState.nowNumber
+        }));
+
+        // }
+        // this.setState(
+        //     prevState => ({
+        //        nowNumber:  !prevState.nowNumber
+        //     })
+        // );
     }
     render() {
         return (
@@ -46,6 +57,7 @@ class Clock extends React.Component {
                     it is {this.state.date.toLocaleTimeString()}
                     <Formated name={ks} data= {this.state.date}/>
                     <a href="#" onClick={this.activeLaser}>center</a>
+                    <p>{this.state.nowNumber?"OFF":"ON"}</p>
                 </h1>
             </div>
         )
