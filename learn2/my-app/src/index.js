@@ -37,16 +37,9 @@ class Clock extends React.Component {
         });
     }
     activeLaser = () => {
-        // function handleClick(e){
         this.setState(prevState => ({
             nowNumber: !prevState.nowNumber
         }));
-        // }
-        // this.setState(
-        //     prevState => ({
-        //        nowNumber:  !prevState.nowNumber
-        //     })
-        // );
     }
     render() {
         return (
