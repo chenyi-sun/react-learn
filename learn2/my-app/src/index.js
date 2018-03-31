@@ -38,7 +38,6 @@ class Clock extends React.Component {
     }
     activeLaser(){
         // function handleClick(e){
-        console.log("dksjkjs");
         this.setState(prevState => ({
             nowNumber: !prevState.nowNumber
         }));
