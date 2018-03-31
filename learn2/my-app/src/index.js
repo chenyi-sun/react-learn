@@ -20,7 +20,7 @@ class Clock extends React.Component {
             date: new Date(),
             nowNumber: true,
         }
-        this.activeLaser = this.activeLaser.bind(this);
+        // this.activeLaser = this.activeLaser.bind(this);
     }
     componentDidMount(){
         this.timerDI = setInterval(
@@ -36,12 +36,11 @@ class Clock extends React.Component {
             date: new Date()
         });
     }
-    activeLaser(){
+    activeLaser = () => {
         // function handleClick(e){
         this.setState(prevState => ({
             nowNumber: !prevState.nowNumber
         }));
-
         // }
         // this.setState(
         //     prevState => ({
