@@ -3,3 +3,21 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.search-box{
+  width: 300px;
+  min-height: 500px;
+  background: white;
+  border: 1px solid grey;
+  display: inline-block;
+  margin: 0 auto;
+  position: relative;
+  left: 50%;
+  margin-left: -150px;
+  top: 10px;
+}
+/*.search-head{
+  width: 80%;
+  border: 1px solid grey;
+  margin: 0 auto;
+  margin-top: 5px;
+}*/
