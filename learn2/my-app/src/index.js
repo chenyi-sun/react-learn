@@ -37,7 +37,7 @@ class SearchDom extends React.Component {
         return (
         <div>
             <form>
-                <input  className="search-head" placeholder="Search..."/>
+                <input  className="search-head" value={this.props.filterText} placeholder="Search..." onChange={this.props.change}/>
                 <p>
                     <input type="checkbox"/>
                     &nbsp;Only show products in stock
@@ -51,17 +51,19 @@ class ShowBox extends React.Component {
     render(){
         var rows = [];
         var lastCategory = null;
+        var self = this;
         this.props.data.forEach(function(item,i){
-            console.log(item);
-            if(item.category !== lastCategory){
-                rows.push(
-                    <TrDom key={i} name={item.category}  type="2"/>
-                );
-                lastCategory = item.category;
+            if((item.name.indexOf(self.props.filterText)>=0)||self.props.filterText===''){
+                 if(item.category !== lastCategory){
+                        rows.push(
+                            <TrDom key={i} name={item.category}  type="2"/>
+                        );
+                        lastCategory = item.category;
+                    }
+                    rows.push(
+                        <TrDom key={i+'s'} name={item.name} price={item.price} stock={item.stocked} type="1"/>   
+                    );
             }
-            rows.push(
-                <TrDom key={i+'s'} name={item.name} price={item.price} stock={item.stocked} type="1"/>   
-            );
         });
         return (
             <table>
@@ -77,11 +79,30 @@ class ShowBox extends React.Component {
     }
 }
 class InitDom extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            filterText: '',
+            inStockOnly: false
+        };
+        this.change = this.change.bind(this);
+    }
+    change(e){
+        this.setState({
+            filterText: e.target.value
+        });
+    }
     render(){
         return (
             <div className="search-box">
-                <SearchDom></SearchDom>
-                <ShowBox data = {this.props.data}></ShowBox>
+                <SearchDom
+                    filterText={this.state.filterText}
+                    change={this.change}
+                ></SearchDom>
+                <ShowBox 
+                    data = {this.props.data}
+                    filterText={this.state.filterText}
+                ></ShowBox>
             </div>
         );
     }
