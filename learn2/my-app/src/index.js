@@ -28,8 +28,31 @@ class SearchDom extends React.Component {
 }
 class ShowBox extends React.Component {
     render(){
+        var rows = [];
+        var lastCategory = null;
+        this.props.data.forEach(function(item,i){
+            console.log(item);
+            if(item.category !== lastCategory){
+                rows.push(
+                     <tr key={i}>
+                        <th colSpan="2">{item.category}</th>
+                    </tr>
+                      
+                   );
+                lastCategory = item.category;
+            }
+            
+        });
         return (
-            <div></div>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>s</th>
+                        <th>d</th>
+                    </tr>
+                    {rows}
+                </tbody>
+            </table>
         );
     }
 }
