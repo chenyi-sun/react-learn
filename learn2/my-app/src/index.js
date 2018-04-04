@@ -11,6 +11,27 @@ var date = [
   {category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"}
 ];
 
+class TrDom extends React.Component {
+    render(){
+        if(this.props.type === '1'){
+            return (
+                <tr >
+                    <th style={{color:this.props.stock?'red':''}}>{this.props.name}</th>
+                    <th>{this.props.price}</th>
+                </tr>
+            );
+        }
+        else{
+            return (
+                <tr >
+                    <th colSpan="2">{this.props.name}</th>
+                </tr>
+            );
+        }
+    }
+}
+
+
 class SearchDom extends React.Component {
     render(){
         return (
@@ -34,21 +55,20 @@ class ShowBox extends React.Component {
             console.log(item);
             if(item.category !== lastCategory){
                 rows.push(
-                     <tr key={i}>
-                        <th colSpan="2">{item.category}</th>
-                    </tr>
-                      
-                   );
+                    <TrDom key={i} name={item.category}  type="2"/>
+                );
                 lastCategory = item.category;
             }
-            
+            rows.push(
+                <TrDom key={i+'s'} name={item.name} price={item.price} stock={item.stocked} type="1"/>   
+            );
         });
         return (
             <table>
                 <tbody>
                     <tr>
-                        <th>s</th>
-                        <th>d</th>
+                        <th>name</th>
+                        <th>price</th>
                     </tr>
                     {rows}
                 </tbody>
