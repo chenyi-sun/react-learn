@@ -39,7 +39,7 @@ class SearchDom extends React.Component {
             <form>
                 <input  className="search-head" value={this.props.filterText} placeholder="Search..." onChange={this.props.change}/>
                 <p>
-                    <input type="checkbox"/>
+                    <input type="checkbox" checked={this.props.inStockOnly} onChange={this.props.checkBox}/>
                     &nbsp;Only show products in stock
                 </p>
             </form>
@@ -53,16 +53,16 @@ class ShowBox extends React.Component {
         var lastCategory = null;
         var self = this;
         this.props.data.forEach(function(item,i){
-            if((item.name.indexOf(self.props.filterText)>=0)||self.props.filterText===''){
+            if(((item.name.indexOf(self.props.filterText)>=0)||self.props.filterText==='')&&(!(self.props.inStockOnly)||(self.props.inStockOnly&&item.stocked))){
                  if(item.category !== lastCategory){
-                        rows.push(
-                            <TrDom key={i} name={item.category}  type="2"/>
-                        );
-                        lastCategory = item.category;
-                    }
                     rows.push(
-                        <TrDom key={i+'s'} name={item.name} price={item.price} stock={item.stocked} type="1"/>   
+                        <TrDom key={i} name={item.category}  type="2"/>
                     );
+                    lastCategory = item.category;
+                }
+                rows.push(
+                    <TrDom key={i+'s'} name={item.name} price={item.price} stock={item.stocked} type="1"/>   
+                );
             }
         });
         return (
@@ -86,10 +86,16 @@ class InitDom extends React.Component {
             inStockOnly: false
         };
         this.change = this.change.bind(this);
+        this.checkBox = this.checkBox.bind(this);
     }
     change(e){
         this.setState({
             filterText: e.target.value
+        });
+    }
+    checkBox(){
+        this.setState({
+            inStockOnly: !this.state.inStockOnly
         });
     }
     render(){
@@ -98,17 +104,18 @@ class InitDom extends React.Component {
                 <SearchDom
                     filterText={this.state.filterText}
                     change={this.change}
+                    inStockOnly={this.state.inStockOnly}
+                    checkBox={this.checkBox}
                 ></SearchDom>
                 <ShowBox 
                     data = {this.props.data}
                     filterText={this.state.filterText}
+                    inStockOnly={this.state.inStockOnly}
                 ></ShowBox>
             </div>
         );
     }
 }
-
-
 
 ReactDOM.render(
   <InitDom data={date}/>,
