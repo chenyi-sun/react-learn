@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import {PhotoStory, VideoStory} from './components/Storie.js'
 /*
 var date = [
   {category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},
@@ -115,20 +116,70 @@ class InitDom extends React.Component {
         );
     }
 }*/
-function InitDom(){
-    const is = 11300;
-    let arr = [];
-    for(var i = 0; i<is; i++){
-        arr.push(<div className="is" key={i}></div>);
-    }
-    return (
-        <div>
-            {arr}
-        </div>
-    );
+var components = {
+    photo: PhotoStory,
+    vedio: VideoStory
 }
 
+class NameDom extends React.Component{
+   render(){
+      return [
+        <li key = "A">A</li>,
+        <li key = "B">B</li>
+      ];
+   }
+}
+
+
+class InitDom extends React.Component{
+    constructor(props){
+        super(props);
+        this.alt = this.alt.bind(this);
+        const is = 5;
+        let arr = [];
+        const self = this;
+        for(var i = 0; i<is; i++){
+            arr.push(<div className="is" key={i} onClick={self.alt}></div>);
+        }
+        this.state = {
+            arr: arr,
+        }
+    }
+    alt(){
+        let arr = [];
+        const self = this;
+        for(var i = 0; i<4; i++){
+            arr.push(<div className="is" key={i} onClick={self.alt}></div>);
+        }
+        this.setState({
+            arr: arr
+        });
+    }
+    render(){
+        const Dom = components['photo'];
+        const props = {
+
+        }
+        const todos = ['finish doc', 'submit pr'];
+        return(
+            <div>
+                {this.state.arr}
+                {this.props.foo}
+                <Dom/>
+                <VideoStory></VideoStory>
+                {this.props.name}
+                {todos.map((message)=><div key={message}>{message}</div>)}
+                <NameDom/>
+            </div>
+        )
+    }
+}
+
+const props = {
+    foo: 1+2+5+0,
+    name: "initDoms"
+}
 ReactDOM.render(
-  <InitDom />,
+    <InitDom {...props}></InitDom>,
     document.getElementById('root')
 );
