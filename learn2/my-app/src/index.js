@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
+/*
 var date = [
   {category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},
   {category: "Sporting Goods", price: "$9.99", stocked: true, name: "Baseball"},
@@ -114,9 +114,21 @@ class InitDom extends React.Component {
             </div>
         );
     }
+}*/
+function InitDom(){
+    const is = 11300;
+    let arr = [];
+    for(var i = 0; i<is; i++){
+        arr.push(<div className="is" key={i}></div>);
+    }
+    return (
+        <div>
+            {arr}
+        </div>
+    );
 }
 
 ReactDOM.render(
-  <InitDom data={date}/>,
+  <InitDom />,
     document.getElementById('root')
 );

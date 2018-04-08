@@ -16,7 +16,12 @@ body {
   top: 10px;
 }
 
-
+.is{
+  width: 20px;
+  height: 20px;
+  border: 1px solid grey;
+  display: inline-block;
+}
 /*.search-head{
   width: 80%;
   border: 1px solid grey;
