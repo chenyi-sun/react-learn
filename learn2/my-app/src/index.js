@@ -130,7 +130,17 @@ class NameDom extends React.Component{
    }
 }
 
-
+class Nestist extends React.Component{
+    constructor(props){
+        super(props);
+        this.myRef = React.createRef();
+    }
+    render(){
+        return(
+            <div ref={this.myRef}>ddd</div>
+        );
+    }
+}
 class InitDom extends React.Component{
     constructor(props){
         super(props);
@@ -144,6 +154,9 @@ class InitDom extends React.Component{
         this.state = {
             arr: arr,
         }
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        return false;
     }
     alt(){
         let arr = [];
@@ -170,6 +183,7 @@ class InitDom extends React.Component{
                 {this.props.name}
                 {todos.map((message)=><div key={message}>{message}</div>)}
                 <NameDom/>
+                <Nestist/>
             </div>
         )
     }
